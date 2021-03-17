@@ -1,7 +1,12 @@
 package com.hotelreservation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HotelReservation {
-    public static void main(String[] args) {
-        System.out.println("Welcome to Hotel Reservation Program");
+    public static List<HotelDetails> hotelDetails = new ArrayList<>();
+
+    public void addHotel(HotelDetails hotelDetail){
+        hotelDetails.add(hotelDetail);
     }
 }
