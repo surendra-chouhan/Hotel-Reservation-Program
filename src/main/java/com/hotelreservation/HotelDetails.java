@@ -11,6 +11,18 @@ public class HotelDetails {
         this.rating = rating;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
     @Override
     public String toString() {
         return "HotelDetails{" +
