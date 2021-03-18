@@ -5,6 +5,7 @@ public class HotelDetails {
     public int weekendPrice;
     public int weekdayPrice;
     public int rating;
+    public int totalRate;
 
     public HotelDetails(String name, int weekdayPrice, int weekendPrice, int rating){
         this.name = name;
@@ -36,6 +37,11 @@ public class HotelDetails {
 
     public int getWeekdayPrice() {
         return weekdayPrice;
+    }
+
+    public int totalRate(){
+        this.totalRate = weekdayPrice + weekendPrice;
+        return totalRate;
     }
 
     @Override

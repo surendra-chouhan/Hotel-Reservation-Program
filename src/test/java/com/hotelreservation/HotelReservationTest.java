@@ -11,7 +11,7 @@ import static com.hotelreservation.HotelReservation.hotelDetails;
 public class HotelReservationTest {
     HotelReservation hotelReservation;
     HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3);
-    HotelDetails bridgewood = new HotelDetails("Bridgewood", 160, 50,4);
+    HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4);
     HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 5);
 
     @Before
@@ -32,7 +32,7 @@ public class HotelReservationTest {
 
     @Test
     public void find_cheapest_hotel_TrueTest() {
-        HotelDetails cheapestHotel = hotelReservation.findCheapestHotel(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
+        HotelDetails cheapestHotel = hotelReservation.findCheapestHotel_based_on_WeekDay(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
         Assert.assertEquals("Lakewood", cheapestHotel.getName());
     }
 
@@ -43,7 +43,20 @@ public class HotelReservationTest {
         Assert.assertEquals(150, ridgewood.getWeekendPrice());
 
         Assert.assertEquals(110, lakewood.getWeekdayPrice());
-        Assert.assertEquals(160, bridgewood.getWeekdayPrice());
+        Assert.assertEquals(150, bridgewood.getWeekdayPrice());
         Assert.assertEquals(220, ridgewood.getWeekdayPrice());
+    }
+
+    @Test
+    public void find_cheapest_hotel_based_on_date_TrueTest() {
+        LocalDate startDate = LocalDate.of(2020,10,11);
+        LocalDate endDate = LocalDate.of(2020,10,12);
+
+        HotelDetails cheapestHotelOnWeekDay = hotelReservation.findCheapestHotel_based_on_WeekDay(startDate,endDate);
+        HotelDetails cheapestHotelOnWeekEnd = hotelReservation.findCheapestHotel_based_on_WeekEnd(startDate,endDate);
+
+        Assert.assertEquals("Lakewood", cheapestHotelOnWeekDay.getName());
+        Assert.assertEquals("Bridgewood", cheapestHotelOnWeekEnd.getName());
+
     }
 }
