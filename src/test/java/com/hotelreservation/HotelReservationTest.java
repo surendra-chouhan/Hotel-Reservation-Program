@@ -57,6 +57,12 @@ public class HotelReservationTest {
 
         Assert.assertEquals("Lakewood", cheapestHotelOnWeekDay.getName());
         Assert.assertEquals("Bridgewood", cheapestHotelOnWeekEnd.getName());
+    }
 
+    @Test
+    public void find_ratings_of_Hotels_TrueTest() {
+        Assert.assertEquals(3, lakewood.getRating());
+        Assert.assertEquals(4, bridgewood.getRating());
+        Assert.assertEquals(5, ridgewood.getRating());
     }
 }

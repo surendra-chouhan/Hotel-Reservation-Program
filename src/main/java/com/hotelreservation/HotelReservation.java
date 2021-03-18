@@ -26,8 +26,6 @@ public class HotelReservation {
         System.out.println("Cheapest Hotel is " + cheapest1.getName() + "\nTotal Rate is : " + cheapestRate);
         return cheapest1;
     }
-
-
 }
 
 

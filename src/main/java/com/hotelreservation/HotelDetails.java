@@ -21,8 +21,7 @@ public class HotelDetails {
     public int getRating() {
         return rating;
     }
-
-
+    
     public void setWeekendPrice(int weekendPrice) {
         this.weekendPrice = weekendPrice;
     }
