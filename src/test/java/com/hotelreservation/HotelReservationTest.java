@@ -122,7 +122,7 @@ public class HotelReservationTest {
     }
 
     @Test
-    public void get_Day() throws ParseException {
+    public void add_Reward_Customer() throws ParseException {
         HotelReservation hotelReservation = new HotelReservation(CustomerType.REWARD_CUSTOMER);
         HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3, 80, 80);
         HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4, 110, 50);
@@ -133,5 +133,20 @@ public class HotelReservationTest {
         hotelReservation.addHotel(ridgewood);
 
         Assert.assertEquals(80, lakewood.getWeekdayRewardPrice());
+    }
+
+    @Test
+    public void find_cheapest_bestRated_Hotel_For_REWARD_CUSTOMER_TrueTest() throws ParseException {
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REWARD_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3, 80, 80);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4, 110, 50);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 5, 100, 40);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+
+        HotelDetails cheapHotelForRewardCustomer = hotelReservation.find_BestRated_Hotel(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
+        Assert.assertEquals("Ridgewood", cheapHotelForRewardCustomer.getName());
     }
 }
