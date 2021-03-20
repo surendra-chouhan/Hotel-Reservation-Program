@@ -65,4 +65,9 @@ public class HotelReservationTest {
         Assert.assertEquals(4, bridgewood.getRating());
         Assert.assertEquals(5, ridgewood.getRating());
     }
+
+    @Test
+    public void find_cheapest_bestRated_Hotel_TrueTest() {
+        Assert.assertEquals("Bridgewood",hotelReservation.findBestRatedAndAlsoCheapestHotel());
+    }
 }

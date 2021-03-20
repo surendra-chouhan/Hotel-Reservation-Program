@@ -21,10 +21,35 @@ public class HotelReservation {
 
     public HotelDetails findCheapestHotel_based_on_WeekEnd(LocalDate startDate, LocalDate endDate) {
         long days = ChronoUnit.DAYS.between(startDate, endDate);
-        HotelDetails cheapest1 = Collections.min(hotelDetails, Comparator.comparing(hotelDetail -> hotelDetail.weekendPrice));
-        int cheapestRate = (int)(days* cheapest1.totalRate());
-        System.out.println("Cheapest Hotel is " + cheapest1.getName() + "\nTotal Rate is : " + cheapestRate);
-        return cheapest1;
+        HotelDetails cheapest_on_weekend = Collections.min(hotelDetails, Comparator.comparing(hotelDetail -> hotelDetail.weekendPrice));
+        int cheapestRate = (int)(days* cheapest_on_weekend.totalRate());
+        System.out.println("Cheapest Hotel is " + cheapest_on_weekend.getName() + "\nTotal Rate is : " + cheapestRate);
+        return cheapest_on_weekend;
+    }
+
+    public String findBestRatedAndAlsoCheapestHotel() {
+        HotelDetails cheapestOnWeekdays = Collections.min(hotelDetails,Comparator.comparing(hotelDetail -> hotelDetail.getWeekdayPrice()));
+        HotelDetails cheapestOnWeekend = Collections.min(hotelDetails, Comparator.comparing(hotelDetail -> hotelDetail.getWeekendPrice()));
+
+        if(cheapestOnWeekdays.totalRate() == cheapestOnWeekend.totalRate()){
+            if (cheapestOnWeekdays.rating > cheapestOnWeekend.rating)
+                return cheapestOnWeekdays.getName();
+            else
+                return cheapestOnWeekend.getName();
+        }
+        else if(cheapestOnWeekdays.totalRate() > cheapestOnWeekend.totalRate()){
+            if (cheapestOnWeekdays.rating > cheapestOnWeekend.rating)
+                return cheapestOnWeekdays.getName();
+            else
+                return cheapestOnWeekend.getName();
+        }
+        else if(cheapestOnWeekdays.totalRate() > cheapestOnWeekend.totalRate()){
+            if(cheapestOnWeekdays.rating < cheapestOnWeekend.rating)
+                return cheapestOnWeekdays.getName();
+            else
+                return cheapestOnWeekend.getName();
+        }
+        return null;
     }
 }
 

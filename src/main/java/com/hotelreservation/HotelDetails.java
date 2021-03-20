@@ -21,17 +21,9 @@ public class HotelDetails {
     public int getRating() {
         return rating;
     }
-    
-    public void setWeekendPrice(int weekendPrice) {
-        this.weekendPrice = weekendPrice;
-    }
 
     public int getWeekendPrice() {
         return weekendPrice;
-    }
-
-    public void setWeekdayPrice(int weekdayPrice) {
-        this.weekdayPrice = weekdayPrice;
     }
 
     public int getWeekdayPrice() {
