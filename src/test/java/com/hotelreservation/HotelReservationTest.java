@@ -3,9 +3,7 @@ package com.hotelreservation;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.time.LocalDate;
-
 import static com.hotelreservation.HotelReservation.hotelDetails;
 
 public class HotelReservationTest {
@@ -69,5 +67,11 @@ public class HotelReservationTest {
     @Test
     public void find_cheapest_bestRated_Hotel_TrueTest() {
         Assert.assertEquals("Bridgewood",hotelReservation.findBestRatedAndAlsoCheapestHotel());
+    }
+
+    @Test
+    public void find_BestRated_Hotel_TrueTest() {
+        HotelDetails bestRatedHotel = hotelReservation.find_BestRated_Hotel(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
+        Assert.assertEquals("Ridgewood", bestRatedHotel.getName());
     }
 }
