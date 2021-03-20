@@ -1,41 +1,52 @@
 package com.hotelreservation;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import java.text.ParseException;
 import java.time.LocalDate;
 import static com.hotelreservation.HotelReservation.hotelDetails;
 
 public class HotelReservationTest {
-    HotelReservation hotelReservation;
-    HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3);
-    HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4);
-    HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 5);
+    @Test
+    public void add_Hotel_TrueTest() {
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REGULAR_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,0, 0, 0);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,0, 0, 0);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 0, 0, 0);
 
-    @Before
-    public void setup() {
-        hotelReservation = new HotelReservation();
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-    }
 
-
-    @Test
-    public void add_Hotel_TrueTest() {
         Assert.assertTrue(hotelDetails.contains(lakewood));
-        Assert.assertTrue(hotelDetails.contains(bridgewood));
-        Assert.assertTrue(hotelDetails.contains(ridgewood));
-}
+    }
 
     @Test
     public void find_cheapest_hotel_TrueTest() {
-        HotelDetails cheapestHotel = hotelReservation.findCheapestHotel_based_on_WeekDay(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REGULAR_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,0, 0, 0);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,0, 0, 0);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 0, 0, 0);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+
+        HotelDetails cheapestHotel = hotelReservation.findCheapestHotel(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
         Assert.assertEquals("Lakewood", cheapestHotel.getName());
     }
 
     @Test
     public void add_WeekDay_and_Weekend_Rates_TrueTest() {
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REGULAR_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,0, 0, 0);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,0, 0, 0);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 0, 0, 0);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+        
         Assert.assertEquals(90, lakewood.getWeekendPrice());
         Assert.assertEquals(50, bridgewood.getWeekendPrice());
         Assert.assertEquals(150, ridgewood.getWeekendPrice());
@@ -47,18 +58,34 @@ public class HotelReservationTest {
 
     @Test
     public void find_cheapest_hotel_based_on_date_TrueTest() {
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REGULAR_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,0, 0, 0);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,0, 0, 0);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 0, 0, 0);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+        
         LocalDate startDate = LocalDate.of(2020,10,11);
         LocalDate endDate = LocalDate.of(2020,10,12);
 
-        HotelDetails cheapestHotelOnWeekDay = hotelReservation.findCheapestHotel_based_on_WeekDay(startDate,endDate);
-        HotelDetails cheapestHotelOnWeekEnd = hotelReservation.findCheapestHotel_based_on_WeekEnd(startDate,endDate);
+        HotelDetails cheapestHotel = hotelReservation.findCheapestHotel(startDate,endDate);
 
-        Assert.assertEquals("Lakewood", cheapestHotelOnWeekDay.getName());
-        Assert.assertEquals("Bridgewood", cheapestHotelOnWeekEnd.getName());
+        Assert.assertEquals("Lakewood", cheapestHotel.getName());
     }
 
     @Test
     public void find_ratings_of_Hotels_TrueTest() {
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REGULAR_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3, 0, 0);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4, 0, 0);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 5, 0, 0);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+        
         Assert.assertEquals(3, lakewood.getRating());
         Assert.assertEquals(4, bridgewood.getRating());
         Assert.assertEquals(5, ridgewood.getRating());
@@ -66,12 +93,45 @@ public class HotelReservationTest {
 
     @Test
     public void find_cheapest_bestRated_Hotel_TrueTest() {
-        Assert.assertEquals("Bridgewood",hotelReservation.findBestRatedAndAlsoCheapestHotel());
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REGULAR_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3, 0, 0);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4, 0, 0);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 5, 0, 0);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+        
+        HotelDetails cheapestHotel = hotelReservation.findCheapestHotel(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
+        Assert.assertEquals("Bridgewood", cheapestHotel.getName());
     }
 
     @Test
     public void find_BestRated_Hotel_TrueTest() {
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REGULAR_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3, 0, 0);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4, 0, 0);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 5, 0, 0);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+        
         HotelDetails bestRatedHotel = hotelReservation.find_BestRated_Hotel(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
         Assert.assertEquals("Ridgewood", bestRatedHotel.getName());
+    }
+
+    @Test
+    public void get_Day() throws ParseException {
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REWARD_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3, 80, 80);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4, 110, 50);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 5, 100, 40);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+
+        Assert.assertEquals(80, lakewood.getWeekdayRewardPrice());
     }
 }
