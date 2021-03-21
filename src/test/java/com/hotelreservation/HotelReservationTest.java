@@ -149,4 +149,20 @@ public class HotelReservationTest {
         HotelDetails cheapHotelForRewardCustomer = hotelReservation.find_BestRated_Hotel(LocalDate.of(2020,10,10), LocalDate.of(2020,10,11));
         Assert.assertEquals("Ridgewood", cheapHotelForRewardCustomer.getName());
     }
+
+    @Test
+    public void find_cheapest_hotel_best_rated_for_REGULAR_CUSTOMER_TrueTest() throws ParseException {
+        HotelReservation hotelReservation = new HotelReservation(CustomerType.REGULAR_CUSTOMER);
+        HotelDetails lakewood = new HotelDetails("Lakewood", 110, 90,3, 80, 80);
+        HotelDetails bridgewood = new HotelDetails("Bridgewood", 150, 50,4, 110, 50);
+        HotelDetails ridgewood = new HotelDetails("Ridgewood", 220, 150, 5, 100, 40);
+
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+
+        HotelDetails cheapHotelForRegularCustomer = hotelReservation.findCheapestHotel(LocalDate.of(2020,10,11), LocalDate.of(2020,10,12));
+        Assert.assertEquals("Bridgewood", cheapHotelForRegularCustomer.getName());
+
+    }
 }

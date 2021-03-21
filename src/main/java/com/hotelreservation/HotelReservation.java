@@ -43,7 +43,6 @@ public class HotelReservation {
         DayOfWeek dayOfWeekForEndDate = DayOfWeek.of(endDate.get(ChronoField.DAY_OF_WEEK));
         int startDay = dayOfWeekForStartDate.getValue();
         int endDay = dayOfWeekForEndDate.getValue();
-
         int min = 10000;
         HotelDetails cheap = hotelDetails.get(0);
 
